@@ -174,12 +174,12 @@
                 }
 
                 if (username && message) {
-                    push(ref(db, "ULTRA"), { username, message, timestamp, reports: 0 });
+                    push(ref(db, "MELON"), { username, message, timestamp, reports: 0 });
                     form.reset();
                 }
             });
 
-            const messagesRef = ref(db, "ULTRA");
+            const messagesRef = ref(db, "MELON");
             onValue(messagesRef, (snapshot) => {
                 const messages = [];
                 snapshot.forEach((childSnapshot) => {
@@ -209,7 +209,7 @@
                         reportedMessages.push(id);
                         localStorage.setItem("reportedGroupMessages", JSON.stringify(reportedMessages));
 
-                        const messageRef = ref(db, `ULTRA/${id}`);
+                        const messageRef = ref(db, `MELON/${id}`);
                         update(messageRef, { reports: (reports || 0) + 1 });
                         if ((reports || 0) + 1 >= 5) {
                             remove(messageRef);
